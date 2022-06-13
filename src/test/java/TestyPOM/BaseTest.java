@@ -23,9 +23,6 @@ public class BaseTest {
 
         driver.manage().window().setSize(new Dimension(1290, 730));
         driver.manage().window().setPosition(new Point(8, 30));
-
-        driver.navigate().to("https://fakestore.testelka.pl");
-        driver.findElement(By.cssSelector(".woocommerce-store-notice__dismiss-link")).click();
     }
 
     @AfterEach

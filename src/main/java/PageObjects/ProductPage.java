@@ -38,8 +38,7 @@ public class ProductPage extends BasePage {
         return new CartPage(driver);
     }
 
-    public ProductPage addProductToCart(String productPageUrl, String quantity) {
-        driver.navigate().to(productPageUrl);
+    public ProductPage addToCart(String quantity) {
         WebElement quantityField = driver.findElement(quantityFieldLocator);
         quantityField.clear();
         quantityField.sendKeys(quantity);
