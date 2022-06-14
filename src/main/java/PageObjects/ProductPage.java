@@ -9,10 +9,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductPage extends BasePage {
 
+    public HeaderPage header;
     private WebDriverWait wait;
 
     public ProductPage(WebDriver driver) {
         super(driver);
+        header = new HeaderPage(driver);
         wait = new WebDriverWait(driver, 7);
     }
 
