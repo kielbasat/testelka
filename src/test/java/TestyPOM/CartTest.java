@@ -21,7 +21,7 @@ public class CartTest extends BaseTest {
     @Test
     public void addToCartFromProductPageTest() {
         ProductPage productPage = new ProductPage(driver).goTo(productUrl);
-        productPage.closeDemoNotice();
+        productPage.notice.closeDemoNotice();
         boolean isProductInCart = productPage.addToCart().viewCart().isProductInCart(productId);
         assertTrue(isProductInCart,
                 "Remove button was not found for a product with " + productId + " (Egipt - El Gouna). " +
@@ -31,7 +31,7 @@ public class CartTest extends BaseTest {
     @Test
     public void addToCartFromCategoryPageTest() {
         CategoryPage categoryPage = new CategoryPage(driver).goTo(productCategoryUrl);
-        categoryPage.closeDemoNotice();
+        categoryPage.notice.closeDemoNotice();
         boolean isProductInCart = categoryPage.addToCart(productId).viewCart().isProductInCart(productId);
 
         assertTrue(isProductInCart,
@@ -42,7 +42,7 @@ public class CartTest extends BaseTest {
     @Test
     public void addOneProductTenTimesTest() {
         ProductPage productPage = new ProductPage(driver).goTo(productUrl);
-        productPage.closeDemoNotice();
+        productPage.notice.closeDemoNotice();
         int quantity = productPage.addToCart(productQuantity).viewCart().getQuantityInt();
         assertEquals(10, quantity,
                 "Quantity of the product is not what expected. Expected: 10, but was " + quantity);

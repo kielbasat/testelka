@@ -8,9 +8,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class CategoryPage extends BasePage {
 
     private WebDriverWait wait;
+    public NoticePage notice;
 
     public CategoryPage(WebDriver driver) {
         super(driver);
+        notice = new NoticePage(driver);
         wait = new WebDriverWait(driver, 5);
     }
 
