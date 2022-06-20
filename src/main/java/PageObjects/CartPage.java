@@ -12,7 +12,7 @@ public class CartPage extends BasePage {
         super(driver);
     }
     private WebDriverWait wait = new WebDriverWait(driver, 7);
-    private By shopTableLocator = By.cssSelector(".shop_table");
+    private By shopTableLocator = By.cssSelector("form>.shop_table");
     private By productQuantityLocator = By.cssSelector("div.quantity>input");
     private By cartItemLocator = By.cssSelector(".cart_item");
     private By cartQuantityFieldLocator = By.cssSelector("input.qty");
@@ -20,6 +20,7 @@ public class CartPage extends BasePage {
     private By quantityOfProductLocator = By.cssSelector("div.quantity>input");
     private By blockOverlayLocator = By.cssSelector(".blockOverlay");
     private By emptyCartMessageLocator = By.cssSelector("p.cart-empty");
+    private By checkoutButton = By.cssSelector(".checkout-button");
     private String removeProductCssSelector = "a[data-product_id='<product_id>']";
 
     public int getQuantityInt() {
@@ -53,21 +54,21 @@ public class CartPage extends BasePage {
      }
 
 
-    public CartPage setQuantity() {
+    public CartPage setQuantity(int quantity) {
         WebElement quantityField = driver.findElement(cartQuantityFieldLocator);
         quantityField.clear();
-        quantityField.sendKeys("8");
-        return new CartPage(driver);
+        quantityField.sendKeys(Integer.toString(quantity));
+        return this;
     }
 
     public CartPage updateCart() {
         WebElement updateButton = driver.findElement(updateCartButtonLocator);
         wait.until(ExpectedConditions.elementToBeClickable(updateButton));
         updateButton.click();
-        return new CartPage(driver);
+        return this;
     }
 
-    public int getQuantityOfProduct() {
+    public int getQuantityOfProducts() {
         String quantityString = driver.findElement(quantityOfProductLocator).getAttribute("value");
         int quantity = Integer.parseInt(quantityString);
         return quantity;
@@ -76,12 +77,17 @@ public class CartPage extends BasePage {
     public CartPage removeFromCart(String productId) {
         By removeProductLocator = By.cssSelector(removeProductCssSelector.replace("<product_id>",productId));
         driver.findElement(removeProductLocator).click();
-        return new CartPage(driver);
+        return this;
     }
 
     public int checkNumberOfEmptyCartMessages() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(blockOverlayLocator));
         return driver.findElements(emptyCartMessageLocator).size();
+    }
+
+    public CheckoutPage checkout() {
+        driver.findElement(checkoutButton).click();
+        return new CheckoutPage(driver);
     }
 }
 

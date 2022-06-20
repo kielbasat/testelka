@@ -3,8 +3,6 @@ package TestyPOM;
 import PageObjects.CategoryPage;
 import PageObjects.ProductPage;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -64,9 +62,9 @@ public class CartTest extends BaseTest {
     public void changeNumberOfProductsTest() {
         ProductPage productPage = new ProductPage(driver).goTo(productUrl);
         productPage.notice.closeDemoNotice();
-        int quantity = productPage.addToCart("1").viewCart().setQuantity().updateCart().getQuantityOfProduct();
+        int quantity = productPage.addToCart("1").viewCart().setQuantity(8).updateCart().getQuantityOfProducts();
         assertEquals(8, quantity,
-                "Quantity of the product is not what expected. Expected: 2, but was " + quantity);
+                "Quantity of the product is not what expected. Expected: 8, but was " + quantity);
     }
 
     @Test
